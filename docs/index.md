@@ -6,17 +6,10 @@
     2025.1
 
 
-## Ycaro Campovilla Mendes  De Barros
+## Grupo/Kit X
 
-1. Arthur Borba
-2. Arthur Napoles
-3. Enrico Comasseto Di Gioia
-4. Enzo godoy
-5. Rafael Lucena
 6. Ycaro Campovilla
-1. Grupo K
-    - João da Silva
-    - Pedro de Souza
+
 
 
 
