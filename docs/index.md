@@ -1,122 +1,96 @@
-# 📚 Machine Learning 2025.2
+# Template de Entrega
 
-<div align="center">
 
-**Instrutor:** Humberto Sandmann  
-**Última atualização:** 25 de Agosto de 2025  
-**Repositório:** [GitHub](https://github.com)
+???+ info inline end "Edição"
 
-</div>
+    2025.1
 
----
 
-## 📋 Índice
+## Grupo/Kit X
 
-| Módulo | Tópico | Status |
-|:-------|:-------|:-------|
-| **1** | **Conceitos Fundamentais** | ✅ |
-| 1.1 | [Machine Learning](#11-machine-learning) | ✅ |
-| 1.2 | [KDD](#12-kdd) | ✅ |
-| 1.3 | [Dados](#13-dados) | ✅ |
-| 1.4 | [Exercícios](#14-exercícios) | ✅ |
-| **2** | [Árvores de Decisão](#2-árvores-de-decisão) | 🔄 |
-| **3** | [Pré-processamento](#3-pré-processamento) | ❌ |
-| **4** | [KNN](#4-knn) | ❌ |
-| **5** | [K-Means](#5-k-means) | ❌ |
-| **6** | [Métricas de Avaliação](#6-métricas-de-avaliação) | ❌ |
-| **7** | [Floresta Aleatória](#7-floresta-aleatória) | ❌ |
-| **8** | [SVM](#8-svm) | ❌ |
-| **9** | [PageRank](#9-pagerank) | ❌ |
-| **10** | [PySpark](#10-pyspark) | ❌ |
+Ycaaro Campovilla 
 
----
 
-## 1. Conceitos Fundamentais
 
-### 1.1 Machine Learning
 
-<div style="background: #f0f9ff; padding: 15px; border-radius: 8px; border-left: 4px solid #0369a1; margin: 15px 0;">
+!!! tip "Instruções"
 
-**Definição:** Machine Learning é um subcampo da inteligência artificial que se concentra no desenvolvimento de sistemas que podem aprender com dados.
+    Vocês devem utilizar este template como um bloco de notas para registrar o que foi feito e o que falta fazer. Vocês devem adicionar as informações necessárias.
+    O template deve ser editado e atualizado a cada entrega, registrando assim a data de entrega e o que foi feito até o momento via Git.
 
-</div>
+## Entregas
 
-**Tipos de Aprendizado:**
-- ✅ **Aprendizado Supervisionado:** Modelos são treinados com dados rotulados
-- 🔄 **Aprendizado Não Supervisionado:** Modelos identificam padrões em dados não rotulados
-- ❌ **Aprendizado por Reforço:** Modelos aprendem através de tentativa e erro
+- [x] Roteiro 1 - Data 23/02/2025
+- [ ] Roteiro 2
+- [ ] Roteiro 3
+- [ ] Roteiro 4
+- [ ] Projeto
 
-### 1.2 KDD
+## Diagramas
 
-<div style="background: #f0fdf4; padding: 15px; border-radius: 8px; border-left: 4px solid #15803d; margin: 15px 0;">
+Use o [Mermaid](https://mermaid.js.org/intro/){:target='_blank'} para criar os diagramas de documentação.
 
-**KDD (Knowledge Discovery in Databases)** é o processo não trivial de identificar padrões válidos, novos, potencialmente úteis e compreensíveis nos dados.
+[Mermaid Live Editor](https://mermaid.live/){:target='_blank'}
 
-</div>
 
-**Etapas do KDD:**
-1. Seleção de dados
-2. Pré-processamento
-3. Transformação
-4. Mineração de dados
-5. Interpretação/avaliação
+``` mermaid
+flowchart TD
+    Deployment:::orange -->|defines| ReplicaSet
+    ReplicaSet -->|manages| pod((Pod))
+    pod:::red -->|runs| Container
+    Deployment -->|scales| pod
+    Deployment -->|updates| pod
 
-### 1.3 Dados
+    Service:::orange -->|exposes| pod
 
-<div style="background: #fffbeb; padding: 15px; border-radius: 8px; border-left: 4px solid #f59e0b; margin: 15px 0;">
+    subgraph  
+        ConfigMap:::orange
+        Secret:::orange
+    end
 
-Os dados são a matéria-prima fundamental para qualquer projeto de Machine Learning.
+    ConfigMap --> Deployment
+    Secret --> Deployment
+    classDef red fill:#f55
+    classDef orange fill:#ffa500
+```
 
-</div>
 
-**Tipos de Dados:**
-- **Estruturados:** Tabelas, bancos de dados relacionais
-- **Não estruturados:** Texto, imagens, áudio
-- **Semi-estruturados:** JSON, XML
 
-### 1.4 Exercícios
+## Códigos
 
-<div style="background: #fdf2f8; padding: 15px; border-radius: 8px; border-left: 4px solid #ec4899; margin: 15px 0;">
+=== "De um arquivo remoto"
 
-**Exercício 1:** Explique a diferença entre aprendizado supervisionado e não supervisionado.
+    ``` { .yaml .copy .select linenums='1' title="main.yaml" }
+    --8<-- "https://raw.githubusercontent.com/hsandmann/documentation.template/refs/heads/main/.github/workflows/main.yaml"
+    ```
 
-**Resposta:** 
-O aprendizado supervisionado utiliza dados rotulados para treinar modelos, enquanto o não supervisionado busca padrões em dados não rotulados.
+=== "Anotações no código"
 
-</div>
+    ``` { .yaml title="compose.yaml" }
+    name: app
 
----
+        db:
+            image: postgres:17
+            environment:
+                POSTGRES_DB: ${POSTGRES_DB:-projeto} # (1)!
+                POSTGRES_USER: ${POSTGRES_USER:-projeto}
+                POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-projeto}
+            ports:
+                - 5432:5432 #(2)!
+    ```
 
-## 2. Árvores de Decisão
+    1.  Caso a variável de ambiente `POSTGRES_DB` não exista ou seja nula - não seja definida no arquivo `.env` - o valor padrão será `projeto`. Vide [documentação](https://docs.docker.com/reference/compose-file/interpolation/){target='_blank'}.
 
-<div style="background: #faf5ff; padding: 15px; border-radius: 8px; border-left: 4px solid #8b5cf6; margin: 15px 0;">
+    2. Aqui é feito um túnel da porta 5432 do container do banco de dados para a porta 5432 do host (no caso localhost). Em um ambiente de produção, essa porta não deve ser exposta, pois ninguém de fora do compose deveria acessar o banco de dados diretamente.
 
-**Status:** Em andamento 🔄  
-**Data de estudo:** 25/08/2025
 
-</div>
+## Exemplo de vídeo
 
-**Conceito:** Árvores de decisão são estruturas hierárquicas que representam regras de decisão.
+Lorem ipsum dolor sit amet
 
-**Vantagens:**
-- Fáceis de interpretar
-- Não requerem pré-processamento extensivo
-- Lidam bem com dados numéricos e categóricos
+<iframe width="100%" height="470" src="https://www.youtube.com/embed/3574AYQml8w" allowfullscreen></iframe>
 
-**Algoritmos populares:**
-- ID3
-- C4.5
-- CART
 
-```python
-# Exemplo de código para árvore de decisão
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.datasets import load_iris
+## Referências
 
-# Carregar dados
-iris = load_iris()
-X, y = iris.data, iris.target
-
-# Criar e treinar modelo
-clf = DecisionTreeClassifier()
-clf.fit(X, y)
+[Material for MkDocs](https://squidfunk.github.io/mkdocs-material/reference/){:target='_blank'}
